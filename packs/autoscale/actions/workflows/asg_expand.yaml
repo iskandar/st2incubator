@@ -72,7 +72,7 @@ workflows:
           cmd: 'echo faking out noop'
         publish:
           should_provision: (<% $.last_expand_timestamp %> + (<% $.expand_delay %> * 60)) < <% $.current_epoch %>
-          nodes_to_provision: <% range(0,$.expand_by).list() %>
+          nodes_to_provision: <% list(range(0,$.expand_by)) %>
         on-success:
           - provision_new_nodes: <% $.should_provision %> # cannot 'or' here... failure
       provision_new_nodes:
